@@ -6,8 +6,6 @@ import './styles.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <HashRouter><App /></HashRouter>
   </React.StrictMode>
 );

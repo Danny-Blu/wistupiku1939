@@ -1,65 +1,57 @@
-# Wist'upiku — Tradición viva 🥟
+# Wist'upiku — Identidad visual actualizada 🥟
 
-**Primera versión unificada de los ZIP de Lovable, v0 y Google AI.** Proyecto React + Vite + JavaScript/JSX, con CSS editorial y soporte de Tailwind.
+Versión actualizada del proyecto React + Vite + JSX. Incluye la identidad visual proporcionada por el equipo, mejora de formularios, corrección del fallo de pantalla blanca del QR y rutas compatibles con GitHub Pages.
 
-## Para abrir en VS Code (Windows)
+## Cambios de esta versión
 
-1. Descomprimí el ZIP, abrí la carpeta `Wistupiku-Endgame` en VS Code.
-2. Instalá **Node.js LTS** si todavía no lo tenés.
-3. En una terminal, ejecutá:
+- Logo suministrado por la diseñadora: `src/assets/brand/wistupiku-logo.png`. Se utiliza en header, footer y pantalla de pago. Incluye icono de pestaña (favicon).
+- Paleta final: marrón `#4A3329`, azul profundo `#263746`, coral `#D96B50`, durazno `#E8A77F`, crema `#F9F5EE`.
+- Campos, selects, textarea y controles de formulario redondeados, con enfoque visible y mejor contraste. Radios de pago conservan tamaño correcto.
+- Pago QR: importación del icono faltante corregida, tarjeta rediseñada, enlaces que admiten `HashRouter` para GitHub Pages, botón de simulación local y renovación del QR vencido.
+- Se conservan catálogo, carrito, delivery, las siete páginas y la navegación flotante.
+- `vite.config.js` preparado para `/wistupiku1939/`, `main.jsx` utiliza `HashRouter` y `.github/workflows/deploy.yml` publica `dist` en GitHub Pages.
 
-```bash
-npm install
-npm run dev
-```
+## ¡IMPORTANTE! Cómo actualizar TU repositorio existente
 
-4. Abrí la dirección local que Vite muestre (normalmente `http://localhost:5173`).
+Ya tenés una carpeta `Wistupiku-Endgame` conectada a GitHub con su directorio **oculto** `.git` y un `package-lock.json` generado en tu PC. **No borres esa carpeta para reemplazarla por el ZIP.**
 
-Para verificar y generar versión de distribución:
+1. Descomprimí este ZIP en una carpeta temporal (por ejemplo `Descargas/actualizacion-wistu`).
+2. Abrí la carpeta `Wistupiku-Endgame` extraída del ZIP, copiá su contenido y pegalo **dentro de la carpeta original** `Wistupiku-Endgame` donde trabajás con VS Code.
+3. Aceptá **Reemplazar los archivos existentes** cuando Windows te pregunte. Así mantenés tu directorio `.git` y `package-lock.json` locales. Copiar contenido *encima*, no reemplazar la carpeta original entera.
+4. En VS Code, abrí la terminal y probá:
 
-```bash
-npm run test
-npm run build
-```
+   ```bash
+   npm run dev
+   npm run build
+   ```
 
-El build genera la carpeta `dist/`, que se puede publicar en Vercel. Configurá redirección SPA para que las rutas internas se abran directamente.
+5. Cuando esté todo bien, subí los cambios:
 
-## Qué hay dentro
+   ```bash
+   git add .
+   git commit -m "Actualizar identidad, formularios y QR"
+   git push origin main
+   ```
 
-- **Siete páginas:** Inicio, Menú, Servicios, Arma tu Pedido, Nuestra Historia, Sucursales y Contacto.
-- **Diseño**: imágenes locales tomadas de la versión Lovable; header flotante con cápsula centrada inspirado en v0; footer fotográfico monumental reimplementado.
-- **Menú**: categorías, búsqueda, ordenamiento, vista de producto y agregar al carrito.
-- **Carrito**: cantidades, eliminar, persistencia mediante Zustand/localStorage, resumen.
-- **Envío**: tarifas ilustrativas configurables por ciudad/zona, retiro sin recargo.
-- **Checkout**: datos, retiro o delivery, efectivo pendiente o QR de prueba.
-- **QR**: QR válido y escaneable generado por código, con confirmación de pago **local al mismo navegador**. No es un QR bancario y **no sincroniza pagos entre dos dispositivos**. Para eso hace falta una base de datos compartida y autenticación.
-- **Pedidos**: resumen e historial local y progreso editable en `/admin`.
-- **Servicios y contacto**: solicitudes y mensajes guardados localmente en el mismo navegador.
+6. GitHub Actions publicará la web en `https://danny-blu.github.io/wistupiku1939/` al finalizar el proceso.
 
-## Límites importantes
+## Sobre el QR de prueba
 
-Esta es una **versión académica funcional de interfaz**, no un ecommerce listo para cobrar o recibir pedidos verdaderos. Los precios, tarifas, sucursales y direcciones referenciales **no son datos oficiales**. Las fotos de las versiones generadas son ilustrativas y deben verificarse antes de uso público. La clave de `/admin` (`1939`) es **solo una barrera visual de práctica**, NO seguridad; no usar para información real.
+El código QR contiene un **enlace escaneable** a una página con el monto y referencia. El botón `SIMULAR PAGO` confirma la operación **solamente en el navegador donde está guardado el pedido**. Escanear desde otro dispositivo permite ver información, pero no marca un pago como realizado ni transfiere dinero: esa sincronización requeriría un backend. En localhost, un móvil no puede abrir direcciones `localhost` pertenecientes a otro equipo; para escanear desde el móvil, primero publicá el sitio y generá el pedido en el sitio publicado.
 
-No hay backend, verificación de transferencias bancarias, autenticación fuerte, geocodificación ni asignación real de repartidores. Para implementar pedidos reales se necesita API segura, base de datos, gestión de privacidad e integración autorizada de pagos.
+## Estado de validación
 
-**Validación de este entregable:** revisión sintáctica de JSX/JS mediante TypeScript transpileModule (sin errores). La instalación de dependencias y compilación de Vite **no se pudieron ejecutar en el entorno de creación** porque no tiene acceso a npmjs.org. Ejecutá `npm install && npm run build` antes de publicar y compartime cualquier error que te salga para corregirlo.
+Se revisó la sintaxis de los componentes JSX/JS con `typescript.transpileModule` y no se encontraron errores. **No se pudo ejecutar un build de Vite en este entorno** porque `registry.npmjs.org` no es accesible y las dependencias no están instaladas aquí. Ejecutá `npm run build` en tu VS Code antes de publicar; si aparece un error, compartí el mensaje literal para corregirlo.
 
-## Carpetas
+## Notas sobre contenido
 
-```
-src/
-  assets/       Fotos ilustrativas locales
-  components/   Header, footer, productos y carrito
-  data/         Catálogo, ciudades, tarifas
-  lib/          Cálculos y tests
-  pages/        Siete páginas y flujos de compra
-  store/        Estado persistente
-  styles.css    Sistema visual completo
-```
+Los precios, envíos y sucursales del sitio son datos referenciales del ejercicio. Las fotografías son ilustrativas y pueden requerir sustitución. El pago QR es de prueba, no un cobro bancario.
 
-## Notas para futuras mejoras
 
-- Sustituir sucursales ficticias por direcciones y horarios autorizados/verificados.
-- Reemplazar fotografías de categoría por imágenes propias de cada producto.
-- Agregar API segura y verificación real de pago si se transforma en tienda pública.
-- Validar responsive en navegador y dispositivos reales.
+## Actualización de navegación y merchandising (19 oct 2026)
+
+- Navbar y footer: **Inicio → Nuestra Historia → Servicios → Menú → Pedidos → Merchandising → Contacto**.
+- La antigua sección **Sucursales** sigue disponible en `/#/sucursales`, en los enlaces internos del Inicio y en la selección de sucursal del pedido.
+- `/#/merchandising` muestra deliberadamente una página **404 de marca**, aunque la ruta existe a propósito para que pueda visitarse desde el menú.
+- Fotografías editoriales, mosaicos, recuadros de productos y formularios tienen esquinas más orgánicas y redondeadas; el hero de pantalla completa conserva su encuadre.
+- Se mantiene `HashRouter`, la base `/wistupiku1939/`, y `.github/workflows/deploy.yml` para GitHub Pages.
